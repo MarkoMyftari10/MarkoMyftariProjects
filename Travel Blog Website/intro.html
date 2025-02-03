@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The World Is Yours - Travel Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="intro.html">The World Is Yours</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="intro.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="map_explorer.html">Map Explorer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-text">
+            <h1>Explore the World</h1>
+            <p>Discover breathtaking destinations and hidden gems through our curated travel experiences</p>
+            <a href="blog.html" class="btn-explore">Start Exploring <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </header>
+
+    <!-- Featured Destinations -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Featured Destinations</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="images/bali.jpg" alt="Bali" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/paris.jpg" alt="Paris" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/kenya.jpg" alt="Kenya" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/rome.jpg" alt="Rome" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/maldives.jpg" alt="Maldives" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/santorini.jpg" alt="Santorini" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/pyramids of giza.jpg" alt="Pyramids of Giza" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/amazon.jpg" alt="Amazon Rainforest" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="images/new zeland.jpg" alt="New Zealand" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map -->
+    <div id="map" style="height: 400px;"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([37.8, -96], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: ' OpenStreetMap'
+        }).addTo(map);
+
+        // Define states and capitals
+        var locations = [
+            { name: 'California', capital: 'Sacramento', coords: [38.5767, -121.4931] },
+            { name: 'Texas', capital: 'Austin', coords: [30.2672, -97.7431] },
+            { name: 'Florida', capital: 'Tallahassee', coords: [30.4383, -84.2807] },
+            { name: 'New York', capital: 'Albany', coords: [42.6526, -73.7562] }
+        ];
+
+        // Add markers to the map
+        locations.forEach(function(location) {
+            L.marker(location.coords).addTo(map)
+                .bindPopup(location.name + ', Capital: ' + location.capital);
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Sharing the world's most amazing destinations and travel experiences with passionate explorers.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <p class="text-center">&copy; 2025 The World Is Yours. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - The World Is Yours</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .gallery-container img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .footer {
+      margin-top: 20px;
+      background: #343a40;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .nav-link {
+      font-size: 1.2rem;
+    }
+    .gallery-header {
+      font-size: 3rem;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #343a40;">
+    <div class="container">
+      <a class="navbar-brand text-white" href="intro.html">The World Is Yours</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="intro.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-white" href="gallery.html">Gallery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Gallery Section -->
+  <div class="container">
+    <header>
+      <h1 class="gallery-header" style="color: #333;">Why Don't You Take The Risk? <br> <small style="font-size: 1.2rem; color: #666;">Live, Laugh, and Enjoy Life</small></h1>
+    </header>
+    <div class="gallery-container">
+      <img src="images/travel.jpg" alt="Travel Image 1">
+      <img src="images/travel2.jpg" alt="Travel Image 2">
+      <img src="images/travel3.jpg" alt="Travel Image 3">
+      <img src="images/travel4.jpg" alt="Travel Image 4">
+      <img src="images/travel5.jpg" alt="Travel Image 5">
+      <img src="images/travel6.jpg" alt="Travel Image 6">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 The World Is Yours. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

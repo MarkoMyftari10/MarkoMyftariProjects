@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Explorer</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-ajax"></script>
+    <script>
+        var map = L.map('map').setView([20, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Load GeoJSON data for countries
+        var geojsonLayer = new L.GeoJSON.AJAX('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', {
+            onEachFeature: function (feature, layer) {
+                layer.on('mouseover', function () {
+                    this.bindPopup(feature.properties.name + '<br>Capital: ' + feature.properties.capital).openPopup();
+                });
+            }
+        }).addTo(map);
+    </script>
+</body>
+</html>
