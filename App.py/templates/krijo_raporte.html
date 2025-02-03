@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/CSS/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <title>Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        select, button, input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select:focus, button:focus, input:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .loading-spinner {
+            display: none;
+            margin: 20px auto;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <div class="content">
+        <h1>Select a Table</h1>
+        <form method="POST" action="{{ url_for('krijo_raporte', table_name=request.form['table']) }}">
+            <select name="table" required>
+                <option value="" disabled selected>Select a table</option>
+                {% for table in tables %}
+                <option value="{{ table }}" {% if table == selected_table %}selected{% endif %}>{{ table }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Show Table</button>
+        </form>
+
+        {% if data %}
+        <form method="POST" class="mb-3">
+            <div class="form-row">
+                <div class="col">
+                    <select class="form-control" name="filter_column">
+                        <option value="">Select Column</option>
+                        {% for column in columns %}
+                            <option value="{{ column }}">{{ column }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <select class="form-control" name="filter_operator">
+                        <option value="contains">Contains</option>
+                        <option value="does_not_contain">Does Not Contain</option>
+                        <option value="is">Is</option>
+                        <option value="is_not">Is Not</option>
+                        <option value="starts_with">Starts With</option>
+                        <option value="ends_with">Ends With</option>
+                        <option value="is_empty">Is Empty</option>
+                        <option value="is_not_empty">Is Not Empty</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="filter_value" placeholder="Filter Value">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <h2>Data from {{ selected_table }}</h2>
+        <div class="loading-spinner" id="loading-spinner"></div>
+        {% if data|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                    <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    {% for column in columns %}
+                    <td>{{ row[column] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No data available for this table.</p>
+        {% endif %}
+        {% endif %}
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('.nav_btn').click(function(){
+                $('.mobile_nav_items').toggleClass('active');
+            });
+
+            $('form').on('submit', function() {
+                $('#loading-spinner').show();
+                $(this).find('button').prop('disabled', true); // Prevent resubmission
+            });
+
+            // Hide the spinner after page load
+            $(window).on('load', function() {
+                $('#loading-spinner').hide();
+            });
+        });
+    </script>
+</body>
+</html>

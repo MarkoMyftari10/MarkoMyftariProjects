@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/CSS/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <style>
+        /* Basic Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}    
+    <div class="content">
+        <h1>User Management</h1>
+        <button id="editUserBtn">Edit User</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Edit User</h1>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Save</button>
+                    <a href="{{ url_for('users') }}" class="button">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script for modal functionality -->
+    <script>
+        $(document).ready(function() {
+            // Show the modal when the button is clicked
+            $('#editUserBtn').click(function() {
+                $('#editUserModal').show();
+            });
+
+            // Close the modal when the user clicks on <span> (x)
+            $('.close').click(function() {
+                $('#editUserModal').hide();
+            });
+
+            // Close the modal when clicking anywhere outside of the modal
+            $(window).click(function(event) {
+                if ($(event.target).is('#editUserModal')) {
+                    $('#editUserModal').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

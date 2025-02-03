@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Raportime{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    <header>
+        <label for="check">
+            <i class="fas fa-bars" id="sidebar_btn"></i>
+        </label>
+        <div class="left_area">
+            <h3>Raportime <span>Credins</span></h3>
+        </div>
+        <div class="right_area">
+            <a href="{{ url_for('logout') }}" class="logout_btn">Logout</a>
+        </div>
+    </header>
+    <div class="sidebar">
+        <div class="profile_info">
+            <img src="{{ url_for('static', filename='CSS/Credins.jpg') }}" alt="Credins Bank" width="100" height="100" style="margin: auto;">
+            <h4>{{ username }}</h4>
+        </div>
+        <a href="{{ url_for('index') }}"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+    <a href="{{ url_for('krijo_raporte') }}"><i class="fas fa-cogs"></i><span>Krijo Raport</span></a>
+        <a href="#"><i class="fas fa-table"></i><span>Raporte</span></a>
+        <a href="{{ url_for('users') }}"><i class="fas fa-th"></i><span>Users</span></a>
+        <a href="#"><i class="fas fa-info-circle"></i><span>About</span></a>
+        <a href="#"><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+    </div>
+   
+</body>
+</html>
