@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Doctor Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>Total Patients</h3>
+            <p>4</p>
+        </div>
+        <div class="stat-card">
+            <h3>Today's Appointments</h3>
+            <p>8</p>
+        </div>
+        <div class="stat-card">
+            <h3>Active Treatments</h3>
+            <p>16</p>
+        </div>
+    </div>
+
+    <div class="search-section">
+        <input type="text" id="patientSearch" placeholder="Search patients...">
+        <select id="conditionFilter">
+            <option value="">All Conditions</option>
+            <option value="surgery">Post-Surgery</option>
+            <option value="injury">Sports Injury</option>
+            <option value="chronic">Chronic Pain</option>
+        </select>
+    </div>
+
+    <div class="patients-grid">
+        <!-- Patient cards will be populated by JavaScript -->
+    </div>
+</div>
+
+<!-- Modal Template -->
+<div id="patientModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalPatientName"></h2>
+            <button class="close-button" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalPatientDetails">
+            <!-- Patient details will be populated here -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/doctor_dashboard.js') }}"></script>
+<script>
+    // Add this to debug
+    function viewPatientDetails(patientId) {
+        console.log('Viewing patient:', patientId);
+        fetch(`/patient_details/${patientId}`)
+            .then(response => {
+                console.log('Response:', response);
+                return response.json();
+            })
+            .then(patient => {
+                console.log('Patient data:', patient);
+                showPatientModal(patient);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to load patient details. Please try again.');
+            });
+    }
+</script>
+{% endblock %} 

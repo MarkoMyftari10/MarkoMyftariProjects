@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="stats-container">
+        <div class="stat-card">
+            <h3>Progress</h3>
+            <p>75%</p>
+        </div>
+        <div class="stat-card">
+            <h3>Next Appointment</h3>
+            <p>Tomorrow, 10:00 AM</p>
+        </div>
+        <div class="stat-card">
+            <h3>Treatment Week</h3>
+            <p>Week 6 of 12</p>
+        </div>
+    </div>
+
+    <div class="daily-tasks card">
+        <h2>Today's Tasks</h2>
+        <div class="task-list">
+            <!-- Tasks will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <div class="patient-features">
+        <!-- Progress Timeline -->
+        <div class="progress-timeline">
+            <h3>Treatment Progress</h3>
+            <div class="timeline-chart"></div>
+        </div>
+
+        <!-- Exercise Videos -->
+        <div class="exercise-section">
+            <h3>Recommended Exercises</h3>
+            <div class="video-gallery">
+                <!-- Exercise videos -->
+            </div>
+        </div>
+
+        <!-- Appointment Booking -->
+        <div class="appointment-booking">
+            <h3>Schedule Appointment</h3>
+            <div class="calendar-picker"></div>
+        </div>
+
+        <!-- Message Doctor -->
+        <div class="messaging">
+            <h3>Message Your Doctor</h3>
+            <div class="chat-interface"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/patient_dashboard.js') }}"></script>
+{% endblock %}
